@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<style>
+        *{
+            margin: 0;
+        	padding: 0;
+        	border: 0 solid white;
+        }
+        h3{
+        	margin: 0 auto;
+        	width: 100px;
+        /*	-webkit-user-select:none;*/
+        }
+        .contain{
+        	perspective: 800;
+        	-webkit-perspective: 800;
+        	perspective-origin: 50% 50%;
+        	-webkit-perspective-origin: 50% 50%;
+        	position: fixed;
+        	z-index: 999;
+        	top: 0;
+        	height: 100%;
+        	width: 100%;
+        }
+        .cubeCon{
+        	border: 1px solid #ccc;
+        	transform-style: preserve-3d;
+        	-webkit-transform-style: -webkit-preserve-3d;
+        	width: 200px;
+        	height: 200px;
+        	margin: 200px auto;
+        	position: relative;
+        	transform: rotateX(-60deg);
+        }
+        
+        .cube1,.cube2,.cube3,.cube4,.cube5,.cube6{
+        	width: 160px;
+        	height: 160px;
+        	position: absolute;
+        	background: #69c;
+        	color: white;
+        	font-size: 50px;
+        	line-height: 160px;
+        	text-align: center;
+        	padding: 20px;
+        	transition: transform 1s linear;
+        	-webkit-transition: -webkit-transform 1s linear;
+        	user-select:none;
+        	-webkit-user-select:none;
+        }
+        
+        .cube1{}
+        .cube2{
+        	transform-origin: right;
+        	transform: rotateY(-90deg);
+			-webkit-transform-origin: right;
+        	-webkit-transform: rotateY(-90deg);
+        }
+        .cube3{
+        	transform-origin: left;
+        	transform: rotateY(90deg);
+			-webkit-transform-origin: left;
+        	-webkit-transform: rotateY(90deg);
+        }
+        .cube4{
+        	transform-origin: top;
+        	transform: rotateX(-90deg);
+			-webkit-transform-origin: top;
+        	-webkit-transform: rotateX(-90deg);
+        }
+        .cube5{
+        	transform-origin: bottom;
+        	transform: rotateX(90deg);
+			-webkit-transform-origin: bottom;
+        	-webkit-transform: rotateX(90deg);
+        }
+        .cube6{
+        	transform: translateZ(-200px);
+			-webkit-transform: translateZ(-200px);
+        } 
+	</style>
+	<title>立方体</title>
+</head>
+<body>
+	<h3>单击拖动</h3>
+<div class="contain">
+	<div class="cubeCon">
+		<div class="cube1">1</div>
+		<div class="cube2">2</div>
+		<div class="cube3">3</div>
+		<div class="cube4">4</div>
+		<div class="cube5">5</div>
+		<div class="cube6">6</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+	$('.contain').mousedown(function(e) {
+		// var cubeCon = 
+		var aX = e.pageX;
+		var aY = e.pageY;
+		$('.contain').mousemove(function(e) {
+			// alert('success');
+			var ax = aX - e.pageX;
+			var ay = aY - e.pageY;
+
+			var BT = 'rotateX(' + ay + 'deg) ' + 'rotateY(' + ax + 'deg)';
+			$('.cubeCon').css('transform',BT);
+		});
+	});
+	$('.contain').mouseup(function(e) {
+		$('.contain').unbind('mousemove');
+	});
+	$('.contain').mouseleave(function(e) {
+		$('.contain').unbind('mousemove');
+	});
+</script>
+</body>
+</html>

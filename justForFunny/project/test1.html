@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<img src="_doc/20160622/602111_YD0001_2102041990007052193_1.jpg"/>
+		<div id="d1"></div>
+		<input type="button" onclick="waterMark();" 添加水印/>
+		<script type="text/javascript" src="_doc/20160622/602111_YD0001_2102041990007052193_1.jpg" ></script>
+		<script>
+			function waterMark() {
+				plus.pluginWaterMark.waterMark("../../images/cbd.jpg", "北京酒仙桥", "2016-06-14",
+					function(result) {
+						alert("水印添加成功"); 
+						var img = document.getElementById("d1").createElement('img');
+						img.src = "../../images/cbd.jpg";
+					},
+					function(result) {
+						alert("水印添加失败");
+					});
+			}
+		</script>
+	</body>
+</html>

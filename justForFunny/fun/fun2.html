@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.jz{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				border: 1px solid #007AFF;
+				padding: 4px 4px;
+				margin: 4px 4px;
+				position: absolute;
+				left: 100px;
+				top:100px
+			}
+		</style>
+	</head>
+	<body>
+		<div id="jz" class="jz">
+			
+		</div>
+		<script type="text/javascript" src="js/mui.js" ></script>
+		<script>
+			var subview = '';
+			mui.plusReady(function(){
+				subview = plus.webview.currentWebview();
+				document.getElementById("jz").innerHTML = subview.fun;
+			});
+		</script>
+	</body>
+</html>

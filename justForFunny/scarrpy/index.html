@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=94833a63aa7f15adb2b5432a2cba1c8e"></script>
+		<style type="text/css">
+			body {
+				margin: 0;
+				padding: 0;
+			}
+			
+			#container {
+				width: 100%;
+				height: 750px;
+				overflow-y: hidden;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="container"></div>
+		<script>
+			//设置地图
+//			var map = new AMap.Map('container', {
+//				zoom: 12,
+//				center: [116.39, 39.9]
+//			});
+			//设置覆盖物
+//			var marker = new AMap.Marker({
+//				position: [116.480983, 39.989628]
+//			});
+			//设置圆
+//			marker.setMap(map);
+//			var circle = new AMap.Circle({
+//				center: [116.480983, 39.989628],
+//				radius: 100,
+//				fillOpacity: 0.2,
+//				strokeWeight: 0.5
+//			})
+//			circle.setMap(map);
+			//将视图移到当前圆
+//			map.setFitView();
+			//设置窗体
+//			var info = new AMap.InfoWindow({
+//				content: "信息窗体<br>这里是方恒科技大厦",
+//				offset: new AMap.Pixel(0, -28)
+//			})
+//			info.open(map, marker.getPosition());
+			//服务插件
+			var map = new AMap.Map('container', {
+				zoom: 10,
+				center: [116.39, 39.9]
+			});
+			AMap.plugin('AMap.Driving', function() {
+				var walking = new AMap.Driving({
+					map: map
+				})
+				walking.search([{
+					keyword: '望京',
+					city: '北京'
+				}, {
+					keyword: '高德地图',
+					city: '北京'
+				}]);
+			})
+		</script>
+	</body>
+
+</html>

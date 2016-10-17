@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/mui.css" />
+		<style type="text/css">
+			.main {
+				display: none;
+			}
+			
+			.ro {
+				margin: 100px auto auto 100px;
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				transform: rotate(45deg);
+				text-align: center;
+				position: relative;
+				/*-webkit-filter: blur(2px);*/
+			}
+			
+			.ros {
+				margin: -5px auto auto 100px;
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				transform: rotate(45deg);
+				text-align: center;
+				position: relative;
+				/*-webkit-filter: blur(2px);*/
+			}
+			
+			.rol {
+				position: absolute;
+				transform: rotate(-45deg);
+				top: 38px;
+				left: 22px;
+				font-size: 60px;
+				color: yellow;
+				font-family: "楷体";
+			}
+		</style>
+	</head>
+
+	<body>
+		<button class="mui-badge-blue" onclick="show();">显示</button>
+		<div class="main" id="main">
+
+			<div class="ro">
+				<div class="rol">
+					福
+				</div>
+			</div>
+			<div class="ros">
+				<div class="rol">
+					星
+				</div>
+			</div>
+			<div class="ros">
+				<div class="rol">
+					高
+				</div>
+			</div>
+			<div class="ros">
+				<div class="rol">
+					照
+				</div>
+			</div>
+
+		</div>
+
+	</body>
+	<script>
+		function show(){
+			document.getElementById("main").style.display = "block";
+		}
+	</script>
+
+</html>

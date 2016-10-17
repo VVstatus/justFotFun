@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			body{
+				margin: 0;				
+			}
+			.main{
+				width: auto;
+				height: 50px;				
+				margin-top: 2%;
+				/*border: 1px red solid;*/
+			}
+			.cl{
+				width: 200px;
+				overflow-x: overlay;
+				height: 200px;
+				color: white;
+				line-height: 200px;
+				text-align: center;
+				font-size: 35pt;
+				float: left;
+				margin: 5px;				
+				margin-left: 1%;
+				opacity: 0.8;
+				border-radius:  50px;
+				-webkit-transform: rotateZ(45deg);
+				-webkit-transition: -webkit-transform 1s;
+				z-index: 1;
+				/*border: 1px solid red;*/
+			}
+			.cl:hover{
+				-webkit-transform:rotateZ(360deg);
+			}
+		</style>
+	</head>
+	<body>		
+		<div id="main" class="main">
+			<input type="text" id="num" value="5"/>
+			<button onclick="loaddiv();">刷新</button>
+		</div>
+	</body>
+	<script>
+		
+		function loaddiv(){
+			createDiv();
+		}
+		var Interval=""
+		window.onload=function(){
+//			setTimeout(function(){
+//					
+//			},1000);
+			
+	        
+	            
+		}
+		
+//	        Interval=setInterval(function() {
+//	        	
+//	        	//clearInterval(Interval);
+//	        }, 1000);
+	       
+		//动态创建div
+		function createDiv(){
+			
+			var num=document.getElementById("num").value;
+			var rang=GetRandomNum(1,24);
+			//alert(rang);
+			var Odiv="";
+	        for(var i=0; i<num;i++){
+	        	Odiv=document.createElement("div"); //创建一个div
+	        	Odiv.style.textAlign = "left";
+	        	Odiv.className="cl";    //div的class为Box
+	        	Odiv.setAttribute('contenteditable',true);
+	        	document.body.appendChild(Odiv);        //在body内创建一个div	
+	        }
+	      document.getElementById("num").value=0;
+	      synColor();
+		}
+		function GetRandomNum(Min,Max)
+		{   
+			var Range = Max - Min;   
+			var Rand = Math.random();   
+			return(Min + Math.round(Rand * Range));   
+		}  
+		//换色 加事件
+		function synColor(){
+			var div=document.getElementsByClassName("cl");
+			var divlen=div.length;			
+			for (var i=0;i<divlen;i++) {
+				div[i].style.backgroundColor=orderN(i);
+				div[i].innerHTML=i+1;
+				div[i].onclick=function(){
+					alert(this.innerHTML);				
+				}
+			}			
+		}
+		//颜色
+		function orderN(order) {
+			var y = order % 5;
+			var cls = null;
+			switch(y) {
+				case 0:
+					cls = "#dd0333";
+					break;
+				case 1:
+					cls = "#dd02b1";
+					break;
+				case 2:
+					cls = "#6801dd";
+					break;
+				case 3:
+					cls = "#009ede";
+					break;
+				case 4:
+					cls = "#04df64";
+					break;
+				default:
+					break;
+			}
+			return cls;
+		}
+	</script>
+</html>

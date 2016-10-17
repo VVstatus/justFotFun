@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<title></title>
+	</head>
+	<body>
+		<div class="mui-content" style="padding-left: 10%;padding-top: 10%;">
+		<h4 style="margin-left: 18%;">发送短信验证</h4>
+		<input type="text" class="mui-input-range" style="width: 80%;"/>
+		<button id="btn1" class="mui-btn mui-badge-blue mui-left">发送验证码</button>
+		<button id="btn" class="mui-btn mui-badge-blue mui-right">确定</button>
+		</div>
+		<script type="text/javascript" src="js/mui.min.js" ></script>
+		<script>
+			var ws='';
+			mui.plusReady(function(){
+				ws=plus.webview.currentWebview();
+			});
+			document.getElementById("btn").addEventListener('tap',function(){
+				var main = plus.webview.getLaunchWebview(); //获取当前窗口 
+				ws.close();
+				main.setStyle({
+					mask: 'none'
+				});
+			});
+		</script>
+	</body>
+</html>

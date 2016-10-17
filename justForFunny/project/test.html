@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				var url = '_doc/20160617';
+				plus.io.resolveLocalFileSystemURL(
+					url,
+					function(entry) {
+						var dr = entry.createReader();
+						dr.readEntries(function(entries) {
+							var l = entries.length - 10;
+							if (entries.length > 10) {//删除10天前的影像资料
+								for (var i = 0; i < l; i++) {
+									re(entries[i].name);
+								}
+							}
+						});
+					}
+				);
+			});
+
+			function re(m) {
+				var urle = '_doc/' + m;
+				plus.io.resolveLocalFileSystemURL(urle, function(entry) {
+					entry.remove(function(entry) {
+						alert(1111);
+						//                  console.log("文件删除成功==" + relativePath);
+					}, function(e) {
+						//                  console.log("文件删除失败=" + relativePath);
+					});
+				});
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main.css?v=1.0"/>
+		<style type="text/css">
+			body {
+				margin: 0;
+				padding: 0;
+			}
+			
+			#container {
+				width: 100%;
+				height: 750px;
+				overflow-y: hidden;
+			}
+			
+			.taiwan {
+				border: solid 1px red;
+				color: red;
+				float: left;
+				width: 66px;
+				background-color: rgba(255, 0, 0, 0.1)
+			}
+			#tip{
+				position: absolute;
+	            right: 5px;
+	            bottom: 20px;
+	            background-color: #fff;
+	            padding: 6px;
+	            border: solid 1px silver;
+	            border-radius: 3px;
+	            box-shadow: 3px 4px 3px 0px silver;
+			}
+			#tip input[type='button'] {
+	            float: left;
+	            padding: 6px;
+	                        z-index: 10000;
+	            color: #09f;
+	            border: solid 1px #09f;
+	            background-color: #fff;
+	            margin: 3px 9px;
+	            cursor: pointer;
+	            border-radius: 3px;
+	        }
+		</style>
+	</head>
+
+	<body>
+		<div id="container">
+		</div>
+		<div class="tip">
+			<input type="button" name="" id="" value="离开后" />
+		</div>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=94833a63aa7f15adb2b5432a2cba1c8e"></script>
+		<script>
+			var map = new AMap.Map('container', {
+				zoom: 14,
+				center: [116.39, 39.9]
+			});
+			//编辑折线  
+			var arr = new Array(); //经纬度坐标数组
+			arr.push(new AMap.LngLat("116.368904", "39.913423"));
+			arr.push(new AMap.LngLat("116.382122", "39.901176"));
+			arr.push(new AMap.LngLat("116.387271", "39.912501"));
+			arr.push(new AMap.LngLat("116.398258", "39.904600"));
+			//定义折线对象
+			for (var i = 0; i < arr.length; i++) {
+				var content = "<div class = 'taiwan'>移动营销</div>";
+				var marker = new AMap.Marker({
+//					content: content,
+					position: arr[i],
+					offset: new AMap.Pixel(18, -35),
+					title: "移动营销",
+					map: map
+				});
+				var marker1 = new AMap.Marker({
+					content: content,
+					position: arr[i],
+					offset: new AMap.Pixel(0, 0),
+					title: "移动营销",
+					map: map
+				});
+				marker.on('click', markerClick);
+				marker.setMap(map);
+				marker1.setMap(map);
+			}
+
+			function markerClick() {
+				map.clearMap();
+				var polyline = new AMap.Polyline({
+					path: arr, //设置线覆盖物路径
+					strokeColor: "#3366FF", //线颜色
+					strokeOpacity: 1, //线透明度
+					strokeWeight: 4, //线宽
+					strokeStyle: "solid", //线样式
+					strokeDasharray: [10, 5] //补充线样式
+				});
+				polyline.setMap(map);
+			}
+		</script>
+	</body>
+
+</html>

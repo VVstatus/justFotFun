@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.a1{
+				width: 100px;
+				height: 200px;
+				background-color: #0062CC;
+				transition: -webkit-transform 2s;
+			}
+			div:hover{
+				transform: rotate(30deg);
+				-ms-transform: rotate(30deg); /* IE 9 */
+				-webkit-transform: rotate(30deg); /* Safari and Chrome */
+			}
+			p{
+				width: 200px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="a1">
+
+		</div>
+		<video width="320" height="240" controls>
+			<source src="forrest_gump.mp4" type="video/mp4"></source>
+			<source src="forrest_gump.ogg" type="video/ogg"></source>
+			<track src="subtitles_en.vtt" kind="subtitles" srclang="en" label="English">
+			<track src="subtitles_no.vtt" kind="subtitles" srclang="no" label="Norwegian">
+		</video>
+		<p>
+To learn AJAX, you must be familiar with the XML<wbr>Http</wbr>Request Object.
+</p>
+	</body>
+
+</html>

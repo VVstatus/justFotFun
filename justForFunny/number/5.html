@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.myheart {
+				width: 200px;
+				height: 165px;
+				position: relative;
+			}
+			.myheart:before, .myheart:after {
+				content: "";
+				position: absolute;
+				width: 100px;
+				height: 165px;
+				background: red;
+				border-radius: 50px 50px 0 0;
+			}
+			.myheart:before {
+				left: 100px;
+				top: 0;
+				transform: rotate(-45deg);
+				transform-origin: left bottom;
+			}
+			.myheart:after {
+				left: 0;
+				top: 0;
+				transform: rotate(45deg);
+				transform-origin: right bottom;
+			}
+			.myheart {
+				animation: heartjump 2s infinite alternate;
+			}
+			@keyframes heartjump {
+				0%, 60%, 75%, 90%, 100% {
+					transform: scale(1);
+				}
+				15% {
+					transform: scale(0.6);
+				}
+				30% {
+					transform: scale(1);
+				}
+				45% {
+					transform: scale(0.7);
+				}
+			}
+		</style>
+	</head>
+	<body>
+	<div class="myheart"></div>
+	</body>
+</html>

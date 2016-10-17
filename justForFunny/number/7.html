@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				position: relative;
+				left: 100px;
+				top: 100px;
+				border-radius: 100px;
+				width: 200px;
+				height: 200px;
+				background-color: red;
+				transform-origin: center;
+				animation: myFirst 2s infinite linear;
+			}
+			@keyframes myFirst{
+				from{transform: rotate(0deg);opacity: 1;}
+				to{transform: rotate(360deg);opacity: 0.6;}
+				/*75%{transform: rotate(0deg);}
+				100%{transform: rotate(0deg}*/
+			}
+		</style>
+	</head>
+	<body>
+		<div id="aaa">
+			aaa
+		</div>
+	</body>
+</html>

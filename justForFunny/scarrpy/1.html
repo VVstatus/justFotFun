@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<input type="button" onclick="This(this);" value="展开" />
+		<div style="width: 100px;height: 100px;background-color: red;display: none;"></div>
+		<input type="button" onclick="This(this);" value="展开" />
+		<div style="width: 100px;height: 100px;background-color: red;display: none;"></div>
+		<script>
+			function This(t) {
+				if(t.value == "展开") {
+					t.value = "收起";
+					t.nextSibling.nextSibling.style.display = 'block';
+				}else{
+					t.value = '展开';
+					t.nextSibling.nextSibling.style.display = 'none';
+				}
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<title></title>
+		<style>
+			.red_span {
+				color: red;
+			}
+			
+			select {
+				font-size: 17px;
+			}
+			
+			input[type='text'] {
+				width: 100%;
+				height: 40px;
+				margin: 5px 0px 5px 0px;
+				line-height: 20px;
+				padding: 0px;
+			}
+			
+			.mui-plus header.mui-bar {
+				display: none!important;
+			}
+			
+			.mui-plus .mui-bar-nav~.mui-content {
+				padding: 0!important;
+			}
+			
+			.mui-plus .plus {
+				display: inline;
+			}
+			
+			.plus {
+				display: none;
+			}
+			
+			#topPopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			
+			#topPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			
+			p {
+				text-indent: 22px;
+			}
+			
+			span.mui-icon {
+				font-size: 14px;
+				color: #007aff;
+				margin-left: 50%;
+				padding-right: 10px;
+			}
+			
+			.mui-popover {
+				height: 300px;
+			}
+			
+			.mui-content {
+				padding: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<button id="btn">aaaa</button>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script>
+			document.getElementById("btn").addEventListener('tap', function() {
+				var main = plus.webview.getLaunchWebview(); //获取当前窗口
+				main.setStyle({
+					mask: 'rgba(0,0,0,0.4)'
+				});
+				mui.openWindow({
+					url: 'wan1.html',
+					id: 'wan',
+					styles: {
+						top:'40%',
+						bottom:'20%',
+						left:'40%',
+						width:'20%'
+					},
+					extras: {
+						//自定义扩展参数，可以用来处理页面间传值
+					},
+					createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+					waiting: {
+						autoShow: false, //自动显示等待框，默认为true
+					}
+				})
+			});
+//			mui.back = function() {
+//				var main = plus.webview.getLaunchWebview(); //获取当前窗口
+//				main.setStyle({
+//					mask: 'none'
+//				});
+//			}
+		</script>
+	</body>
+
+</html>

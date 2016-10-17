@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			window.onload = function() {
+				// 给日期类对象添加日期差方法，返回日期与diff参数日期的时间差，单位为天
+				Date.prototype.mm = function(date) {
+						return (this.getTime() - date.getTime()) / (24 * 60 * 60 * 1000);
+					}
+					// 构造两个日期，分别是系统时间和2013/04/08 12:43:45
+				var now = new Date();
+				var date = new Date('2013/04/08 12:43:45');
+				// 调用日期差方法，求得参数日期与系统时间相差的天数
+				var mm = now.mm(date);
+				// 打印日期差
+				alert(mm);
+			}
+		</script>
+	</body>
+
+</html>

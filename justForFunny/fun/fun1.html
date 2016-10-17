@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/mui.css" />
+	</head>
+	<body>
+		<button class="mui-btn-danger" id="cz">传值</button>
+		<script type="text/javascript" src="js/mui.js" ></script>
+		<script type="text/javascript" src="select.js" ></script>
+		<script>
+			
+			document.getElementById("cz").ontouchend = function(){
+				mui.openWindow('fun2.html','fun2',{
+					fun:"good"
+				});
+				
+				mui.openWindow({
+					url:'fun2.html',
+					id:'fun2',
+					styles:{},
+					extras:{
+						fun:'111'
+						}
+					});
+			}
+		</script>
+	</body>
+</html>

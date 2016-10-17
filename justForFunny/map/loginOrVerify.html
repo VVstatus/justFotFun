@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=2,minimum-scale=0.5, user-scalable=yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link rel="stylesheet" href="../css/mui.css" />
+	</head>
+	<body>
+		<header id="header"  class="mui-bar mui-bar-nav"> 
+		    <h1 id="longinFont" class="mui-title">用户登录</h1>
+		    <a class="mui-pull-right"onclick="closewindow();"><span class="mui-icon mui-icon-closeempty" style="font-size: 35px;"></span></a>
+		</header>
+		
+		<div class="mui-content" style="background-color: #f7f7f7;">
+			<div class="mui-content-padded">
+				<label>用户名：</label>
+		        <div class="mui-textbox"  style="width: 100%; padding:0px;">
+					<input class="mui-input-textbox" type="text" name="username" id="username" value="" />
+				</div>
+			</div>
+			<div class="mui-content-padded">
+				<label>密码：</label>
+		        <div class="mui-input-row mui-password">
+				<input id="password" maxlength="20" type="password" class="mui-input-password">
+				</div>
+			</div>
+			<div class="mui-content-padded" style="padding-bottom: 20px;"></div>
+			<div class="mui-content-padded">
+				<button type="button" class="mui-btn mui-btn-primary mui-btn-block" onclick="submit();">确定</button>
+			</div>
+			<div class="mui-content-padded" style="padding-bottom: 20px;"></div>
+			<div class="mui-content-padded">
+				<button type="button" class="mui-btn mui-btn-warning mui-btn-block mui-btn-outlined" onclick="cancle();">取消</button>
+			</div>
+			<span id="loginError" style="color: red;font-size: 12px;font-weight: 600;margin-left: 90px;"></span>
+		
+		</div>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/lfyh/common.js" ></script>
+		<script type="text/javascript" src="../js/lfyh/platform.js" ></script>
+		<script type="text/javascript" src="../js/lfyh/do.js" ></script>
+		<script>
+			var webview = null;
+			var index = null;
+			var main = null;
+			var current = null;
+			mui.plusReady(function(){
+				webview = plus.webview.currentWebview();
+				index = plus.webview.getLaunchWebview();
+				main = plus.webview.getWebviewById(webview.vid);
+				current = plus.webview.getWebviewById(webview.curr);
+			});
+			function cancle(){
+				closewindow();
+			}
+			function submit(){
+				var username = document.getElementById('username').value;
+				var password = document.getElementById('password').value;
+				if(username == '' || username == null){
+					mui.toast("请输入登录账号！");
+					return;
+				}
+				if(password == '' || password == null){
+					mui.toast("请输入登录密码！");
+					return;
+				}
+				var params = {
+						userId:username,
+						password:password,
+						imei:plus.device.imei,
+						waitTitle: '正在登录...'
+					}
+					appProduct('appUserSignf',params,okCall,errorCall,true);
+			}
+			//登录或者验证成功后的处理函数：关闭窗口和遮罩如果是登录，则将登录信息保存storage
+			function okCall(data){
+				if(data && data.ec=='0'){
+					new UserInfo().userId(data.userId);
+					new UserInfo().ubrcNo(data.ubrcno);
+					new UserInfo().userName(data.userName);
+					new UserInfo().menuName(data.menuName);
+					new UserInfo().mmroleName(data.mmroleName);
+					new UserInfo().menuList(data.mmkMenuList);
+					mui.fire(index,'updateHeader',{
+						passwordflag:data.passwordFlag,
+						userid:data.userId,
+						username:data.userName,
+						mmroleName:data.mmroleName,
+						login:'y'
+					});
+				}else if(data.ec == "EB00103"){
+					mui.alert("该账号已被冻结，暂无法登录！",alertStr);
+				}
+				else if(data.ec == "EB00102"){
+					mui.alert("该用户不存在！",alertStr);
+				}else if(data.ec == "EB00104"){
+					mui.alert("该用户已经在其他pad上登录，请先签退！",alertStr);
+				}else{
+					mui.alert("密码输入错误！连续输错5次该账户将会被冻结！",alertStr);
+				}
+			}
+			//登录或者验证失败后的回调函数：提示错误信息
+			function errorCall(){
+				document.getElementById("loginError").innerHTML="用户名或密码错误，请重新输入！";
+			}
+			function closewindow(){
+				main.setStyle({
+						mask: 'none'
+					});
+				webview.close();
+			}
+			var first = null;
+			mui.back = function() {
+				closewindow();
+			}
+		</script>
+	</body>
+</html>

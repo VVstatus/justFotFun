@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div name="d" style="width: 100px;height: 100px;background-color: #000000;" id="d1">
+			<input type="checkbox" id="abc" />
+		</div>
+		<div name="d" style="width: 100px;height: 100px;background-color: #000000;" id="d2">
+			<input type="checkbox" id="cba" />
+		</div>
+		<div name="d" style="width: 100px;height: 100px;background-color: #000000;" id="d3">
+			<input type="checkbox" id="bac" />
+		</div>
+		<div name="d" style="width: 100px;height: 100px;background-color: #000000;" id="d4">
+			<input type="checkbox" id="cab" />
+		</div>
+		<div name="d" style="width: 100px;height: 100px;background-color: #000000;" id="d5">
+			<input type="checkbox" id="acb" />
+		</div>
+		<script>
+			var m = document.getElementsByName('d').length;
+			window.onload = function (){
+				for(var i=1;i<=m;i++){
+					var d= 'd'+i;
+					document.getElementById(d).onclick = function(){
+						var iput = this.children[0].id;
+						var put = document.getElementById(iput);
+						if (put.checked == true) {
+							document.getElementById(iput).checked = false;
+						} else {
+							document.getElementById(iput).checked = true;
+						}
+					}
+				}
+			}
+		</script>
+	</body>
+
+</html>

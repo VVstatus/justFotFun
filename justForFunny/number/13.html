@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.blur {      
+			    -webkit-filter: blur(2px);  
+			       -moz-filter: blur(2px);  
+			        -ms-filter: blur(2px);      
+			            filter: blur(2px);      
+			} 
+		</style>
+	</head>
+	<body>
+		<div id="test" style="width: 100px;height: 100px;background-color: red;" class="blur">
+		
+		</div>
+		<script>
+			var screenWidth = window.screen.height;
+			var dm = document.getElementById("test");
+			dm.onmouseover = function(){
+				dm.style.left = 100+"px";
+			}
+		</script>
+	</body>
+</html>

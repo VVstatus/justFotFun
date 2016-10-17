@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<script type="text/javascript">
+//		function $(id) {
+//			return "string" == typeof(id) ? document.getElementById(id) : id;
+//		}
+		var picNum = 0;
+		function FinishLoad() {
+			picNum += 1;
+			alert(picNum);
+			if(picNum == 5) 
+			document.getElementById("in").disabled = false;
+		}
+	</script>
+
+	<body>
+		<div>
+			<img src="" onload="javascript:FinishLoad();" />
+			<img src="" onload="javascript:FinishLoad();" />
+			<img src="" onload="javascript:FinishLoad();" />
+			<img src="" onload="javascript:FinishLoad();" />
+			<img id="is" onload="javascript:FinishLoad();"/>
+			<input id="in" value="button" type="button" disabled="disabled"/>
+		</div>
+		<script>
+			window.onload = function(){
+				var s = document.getElementsByTagName("img");
+				for(var i =0;i<s.length;i++){
+					s[i].src = "http://10.18.10.159:9080/markbank/images/APPTB/010001.jpg";
+				}
+//				document.getElementById("is").src= "http://10.18.10.159:9080/markbank/images/APPTB/010001.jpg";
+			}
+		</script>
+	</body>
+
+</html>

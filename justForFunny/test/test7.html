@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		    #img1 img{
+		    	height: 100px;
+		    	width: 100px;
+		    }
+			.cen{
+				margin:auto;
+				position: absolute;
+				left: 0;top: 0;right: 0;bottom: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="img1">
+			<img src="../img/010001.jpg" onclick="addElementImg('010001')"/>
+			<img src="../img/010006.png" onclick="addElementImg('010006')"/>
+			<img src="../img/135081609.jpg" onclick="addElementImg('135081609')"/>
+		</div>
+		
+		<div id="parentUl"></div>
+	</body>
+	<script>
+		function addElementImg(obj) {
+		  document.getElementById("img1").style.display = "none";
+	　　　　var ul = document.getElementById('parentUl');
+	　　　　//添加 img
+	　　　　var img = document.createElement("img");
+	　　　　//设置 img 属性，如 id
+	　　　　img.setAttribute("id", "newImg");
+	　　　　//设置 img 图片地址
+	　　　　img.src = "../img/"+obj+".jpg";
+		  img.classList.add("cen");
+		  img.onclick = function(){
+		  	document.getElementById("parentUl").innerHTML = "";
+			document.getElementById("img1").style.display = "block";
+		  }
+	　　　　ul.appendChild(img);
+	　　}
+			
+	</script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				var now = new Date();
+				var month = now.getMonth() + 1;
+				if (month < 10) {
+					month = "0" + month;
+				}
+				var day = now.getDate();
+				if (day < 10) {
+					day = "0" + day;
+				}
+				var today = now.getFullYear() + '' + month + '' + day;
+				var url = '_doc/'+today;
+				plus.io.resolveLocalFileSystemURL(
+					url,
+					function(entry) {
+						var dr = entry.createReader();
+						dr.readEntries(function(entries) {
+							var l = entries.length - 10;
+							if (entries.length > 10) {//删除10天前的影像资料
+								for (var i = 0; i < l; i++) {
+									re(entries[i].name);
+								}
+							}
+						});
+					}
+				);
+			});
+
+			function re(m) {
+				var urle = '_doc/' + m;
+				plus.io.resolveLocalFileSystemURL(urle, function(entry) {
+					entry.remove(function(entry) {
+					}, function(e) {
+					});
+				});
+			}
+		</script>
+	</body>
+
+</html>

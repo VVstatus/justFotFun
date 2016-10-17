@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		
+		 <style>
+		 body{
+		 	margin: 0;
+		 	padding: 0;
+		 }
+		 	#mapinfo{
+		 		width: 100%;
+		 		height: 940px;
+		 		margin-top: 1%;
+		 		float: right;
+		 		margin-right: 1%;
+		 		z-index: -1;
+		 		overflow:hidden;
+		 	}
+		 	/*.cont{
+		 		width: 150px;
+		 		height: 60px;
+		 		border: double 2px red;
+		 		
+		 		font-weight: bold;
+		 	}*/
+		 	.cont {border: solid 1px red;color: red;text-align: center;float: left;width: 90px; font-size:20px;background-color: rgba(255, 0, 0, 0.1);}
+		 	#serach{
+		 		width: 30%;
+		 		height: 910px;
+		 		margin-top: 1%;
+		 		margin-left: 1%;
+		 		float: left;
+		 		position: absolute;
+		 		background-color: white;
+		 		text-align: center;
+		 		padding-top: 2%;
+		 		/*border: solid 1px red;*/
+		 		opacity: 0.7;
+		 	}
+		 	.txt{
+		 		width: 180px;
+		 		height: 25px;
+		 		font-size: 14pt;
+		 	}
+		 	#serbtn{
+		 		width: 100px;
+		 		height: 30px;
+		 		font-size: 14pt;
+		 	}
+		 	.detail{
+		 		text-align: center;
+		 	}
+		 	#list{
+		 		width: 100%;
+		 		height: 670px;
+		 		border: 1px green solid;
+		 		overflow: auto;
+		 	}
+		 	tr{
+		 		height: 20px;
+		 		line-height: 20px;
+		 	}
+		 </style>
+	</head>
+	<body onload="init();">
+		<div id="mapinfo" tabindex="0"></div>
+		<div id="serach">
+			<h2>信息搜索</h2>
+			<label>领用人:</label>&emsp;<input name="mtUserId" id="mtUserId" class="txt" value="YD0001"/><br><br>			
+			<label>设备号:</label>&emsp;<input name="mtDevicemac" id="mtDevicemac" class="txt"/><br><br>
+			<button id="serbtn" onclick="">搜索</button><br><br><br>
+			<div id="list">
+				<table width="100%" id="table" border="1">
+					
+						<tr align="center" height="30px">
+							<td colspan="3">所有用户信息</td>
+						</tr>
+						<tr id="beforetr">
+							<td>用户编号</td>
+							<td>设备号</td>
+							<td>领用人</td>
+						</tr>
+				</table>
+				<table width="100%" id="table1" border="1">										
+				</table>
+			</div>
+		</div>
+	</body>	
+	
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/lfyh/do.js"></script>
+	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=27d6efa7f21add2dfaa5e6360ca64c88"></script>
+	<script>	
+		var map="";
+		function init(){
+			//创建地图
+			map = new AMap.Map('mapinfo',{
+	            resizeEnable: true,
+	            zoom: 10,            
+	            center: [116.72269, 39.480978]            
+	      	});
+			queryMapInfo();
+			
+		}	
+	    function queryMapInfo(){
+	     	//alert("ss");
+        	var mtDevicemac= document.getElementById("mtDevicemac").value;
+        	var mtUserId= document.getElementById("mtUserId").value;
+			var parm={
+        		ubrcno:"601101"
+        	};
+        	
+        	//appProduct("appQueryAllMt",parm,successCall,errCall); 
+        	//resquestData("appQueryMt",parm,successCall,errCall);   
+        	resquestData("appQueryAllMt",parm,allsuccessCall,allerrCall);
+        }
+	     var markers ="";
+	     var markers1=""; 
+	     var molist="";
+	     var table = document.getElementById("table");
+	     var table1 = document.getElementById("table1"); 
+        function allsuccessCall(data){
+//        	map.clearMap();//清除地图上的标记
+			var tbinfo=document.getElementById("tbinfo");
+			var obj=data;
+        	var obj=eval('('+data+')');//将字符串格式化为JSON
+        	var listlen=obj['mtQueryList'].length;//集合长度
+        	if(listlen>0){
+        		for(var str in obj['mtQueryList']){   
+        			//创建图标
+			      	var icon=new AMap.Icon({
+			      		image:'../../img/markers_red.png',      		
+			      		size:new AMap.Size(60,60)
+			      	});	
+	    			//创建标记
+					markers = new AMap.Marker({
+					 	position: new AMap.LngLat(obj['mtQueryList'][str].mtLng,obj['mtQueryList'][str].mtLat),
+					 	icon:icon,	  				       		     		    
+						title: "移动营销",
+					    offset: new AMap.Pixel(13, -55),		    
+				        map:map   
+				  	});  
+				    markers1 = new AMap.Marker({
+				    	position: new AMap.LngLat(obj['mtQueryList'][str].mtLng,obj['mtQueryList'][str].mtLat),
+				        content: '<div class=cont>移动营销</div>',		     		     
+						title: "移动营销",
+					    offset: new AMap.Pixel(0, -0),		    
+				        map:map
+				    });
+				    var arr=new Array();
+				    for(var i=0;i<listlen;i++){
+				    	arr.push(new AMap.LngLat(obj['mtQueryList'][i].mtLng,obj['mtQueryList'][i].mtLat));
+				    }				   
+				    markers.on('click',  function(e) {
+						//infowindow.open(map, markers.getPosition())
+						var pams={
+							mtDevicemac:obj['mtQueryList'][str].mtDevicemac,
+        					mtUserId:obj['mtQueryList'][str].mtUserId
+						}
+						resquestData("appQueryMt",pams,allsuccessCall,errCall);
+	                });
+	                markers1.on('click',  function(e) {
+	                	//infowindow.open(map, markers1.getPosition())
+	                });
+				 	//添加线
+				    var polyline = new AMap.Polyline({
+						path: arr, //设置线覆盖物路径
+						strokeColor: "#3366FF", //线颜色
+						strokeOpacity: 1, //线透明度
+						strokeWeight: 4, //线宽
+						strokeStyle: "solid", //线样式
+						strokeDasharray: [10, 5], //补充线样式
+						map:map
+					});
+					polyline.setMap(map);
+					//if(obj['mtQueryList'][str].mtUserId!=""&&obj['mtQueryList'][str].mtUserId!=null){
+						
+					
+						molist+="<tr>"
+							+"<td>"+obj['mtQueryList'][str].mtUserId+"</td>"
+							+"<td>"+obj['mtQueryList'][str].mtDevicemac+"</td>"
+							+"<td>"+obj['mtQueryList'][str].mtUserName+"</td>"
+							+"<tr>";
+					
+	    		}  
+	    		var beforetr= document.getElementById("beforetr")
+	    		table1.innerHTML=molist;
+        	}else{
+        		alert("今日用户没有行为轨迹");
+        	}            	
+			//alert(table.rows[2].cells[2].innerHTML);
+			console.log(table.rows);
+			for(var i=2;i<table.rows.length-1;i++){
+				//alert(i+":"+table.rows[i].cells[1].innerHTML);
+				//alert("下标:"+i+":"+table.rows[i].cells[0].innerHTML+":"+table.rows[i].cells[1].innerHTML);				
+				table.rows[i].onclick=function(){
+					alert(table.rows[i].cells[0].innerHTML+":"+table.rows[i].cells[1].innerHTML);
+					
+				}
+				//break;
+			}
+			
+        }
+        function allerrCall(data){alert(JSON.stringify(data));}
+        function errCall(data){alert(JSON.stringify(data));}        
+        function successCall(data){
+//      	document.getElementById("moreUser").style.display = "";
+        	var data=eval('('+data+')');
+			if(data.mtQueryList.length==0){
+				alert("该用户该日无行为轨迹！");
+			}
+			var list = data.mtQueryList;
+			var arr = new Array;
+			for (var i = 0; i < list.length; i++) {
+				arr.push(new AMap.LngLat(list[i].mtLng, list[i].mtLat));
+			}
+			var l = (arr.length-1);
+			var content1 = "<span>起点</span>";
+			var content2 = "<span>终点</span>";
+			map.clearMap();
+			var marker2 = new AMap.Marker({
+					content: content1,
+					position: new AMap.LngLat(list[0].mtLng, list[0].mtLat),
+					offset: new AMap.Pixel(0, 0),
+					title: "起点",
+					map: map
+				});
+			var marker3 = new AMap.Marker({
+					content: content2,
+					position: new AMap.LngLat(list[l].mtLng, list[l].mtLat),
+					offset: new AMap.Pixel(0, 0),
+					title: "终点",
+					map: map
+				});
+			marker2.setMap(map);
+			marker3.setMap(map);
+			var polyline = new AMap.Polyline({
+				path: arr, //设置线覆盖物路径
+				strokeColor: "#3366FF", //线颜色
+				strokeOpacity: 1, //线透明度
+				strokeWeight: 4, //线宽
+				strokeStyle: "solid", //线样式
+				strokeDasharray: [10, 5], //补充线样式
+				map:map
+			});
+			polyline.setMap(map);
+        }
+        document.getElementById("")
+var virtualHostPath = 'virtualHost/';
+var alertStr="廊坊银行";
+function resquestData(name, params, successCall, errorCall, wait) {
+	//alert(JSON.stringify(params));
+	var url = virtualHostPath + name+'.do';
+		console.log('读取本地虚拟报文' + url);
+		 mui.ajax(url,{
+                type:'get',
+                success:function(data){
+                    console.log('mui test success');
+                    console.log(data);
+                    return successCall(data);
+                },
+                error:function(xhr,typestr,e){
+                    console.log('mui test error');
+                    console.log('mui test error: type='+typestr);
+                }
+            });
+}
+
+
+
+
+	</script>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<!--<input type="text" id="aa"/>-->
+		<div id="openEBankResult"></div>
+		<script type="text/javascript">
+			var yj = '';
+			var yj1 = '';
+			var xj = '';
+			var xj2 = '';
+			var yphone1 = '';
+			var yphone = '';
+			var xphone = '';
+			var xphone1 = '';
+			window.onload = function() {
+				var picture1 = "34567890,456789,4567890,,2222.22";
+				var picture2 = "34567890,sdfsfs456789,4567890,,2222.22";
+				var p1 = picture1.split(',');
+				var p2 = picture2.split(',');
+				for(var i in p1) {
+					if(p1[i] == '') {
+						continue;
+					} else {
+						if(i == 0) {
+							xphone1 = xphone1+" " + p1[i] + '<br />';
+						} else {
+							if(i == p1.length - 1) {
+								xj1 = "  &nbsp;"+p1[i];
+							} else {
+								xphone1 = xphone1 +"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+ p1[i] + '<br />';
+							}
+						}
+
+					}
+				}
+				for(var i in p2) {
+					if(p2[i] == '') {
+						continue;
+					} else {
+						if(i == p2.length - 1) {
+							yj1 = p2[i];
+						} else {
+							yphone1 = yphone1 + p2[i] + '<br />';
+						}
+					}
+				}
+
+				openEBankResult1 = "短信维护成功" + "<br />" + "新签约手机号:" + xphone1 + "新起点金额:" + xj1 + "<br />" +
+					"原签约手机号:" + yphone1 + "原起点金额:" + yj1;
+				document.getElementById("openEBankResult").innerHTML = openEBankResult1;
+				//			document.getElementById("aa").onblur = function(){
+				//				var val = document.getElementById("aa").value;
+				//				var reg = /^\d+(\.\d{2})?$/;
+				//				if(reg.test(val)){
+				//					alert("正确");
+				//				}else{
+				//					alert("不合法");		
+				//				}
+				//			}
+			}
+		</script>
+	</body>
+
+</html>

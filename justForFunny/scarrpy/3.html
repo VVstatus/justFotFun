@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<input type="text" id="aa" onblur="aaa();" />
+		<script>
+			function te() {
+				var m = document.getElementById("aa").value;
+				var reg = /^\d+(\.\d{2})?$/; ///^[0-9]+\.?[0-9]{0,2}$/
+				if(checkAmount(m)) {
+					alert("true");
+				} else {
+					alert("false");
+				}
+			}
+			
+			function aaa(){
+				var m = document.getElementById("aa").value;
+				alert(parseFloat(m).toFixed(2));
+			}
+
+
+			function checkAmount(amount) {
+				if(amount == '' || amount == null) {
+					return false;
+				} else {
+					reg = /^[0-9]+\.?[0-9]{0,2}$/;
+					if(reg.test(amount) == false) {
+						return false;
+					}
+					var aarray = amount.split('.');
+					if(aarray.length == 2) {
+						if(aarray[1].length == 0) {
+							return false;
+						}
+					}
+				}
+				return true;
+			}
+			
+		</script>
+	</body>
+
+</html>

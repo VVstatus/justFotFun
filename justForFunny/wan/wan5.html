@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			function validateDigitsOnly(evt) {
+				var e = evt || window.event,
+					key = e.keyCode || e.which;
+				if (
+					// Backspace, Tab, Enter, Esc, Delete 
+					key == 8 || key == 9 || key == 13 || key == 27 || key == 46 ||
+					// Ctrl + A 
+					(key == 65 && event.ctrlKey === true) ||
+					// Home, End, 四个方向键 
+					key >= 35 && key <= 40) {
+					return;
+				}
+				if (e.shiftKey || e.altKey || e.ctrlKey) {
+					return false;
+				}
+				var el = e.target || e.srcElement,
+					// 最大数字长度 
+					nl = el.getAttribute("data-numbers") || 15,
+					// 最大小数长度 
+					dl = el.getAttribute("data-decimals") || 2,
+					val = el.value,
+					// "." 位置 
+					dotIndex = val.indexOf("."),
+					rng = caret.call(el),
+					// 光标在"."左边 
+					rLeft = rng.end <= dotIndex,
+					// 光标在"."右边 
+					rRight = rng.begin > dotIndex;
+				if (
+					// 数字 
+					key >= 48 && key <= 57 ||
+					// 数字键盘输入的数字 
+					key >= 96 && key <= 105) {
+					if (validateValue(dotIndex, val, rLeft, rRight, nl, dl))
+						return;
+					// 选中部分文本再做一次处理 
+					val = val.substring(0, rng.begin) + val.substring(rng.end);
+					dotIndex = val.indexOf(".");
+					if (validateValue(dotIndex, val, rLeft, rRight, nl, dl))
+						return;
+				} else if (
+					// ".", "," 
+					(key == 190 /*|| key == 188*/ ||
+						// 数字键盘上的 ".", "," 
+						key == 110 /*|| key == 109*/ ) &&
+					// 允许输入小数 
+					dl > 0) {
+					if (
+						// 未输入".", 且输入的位置后面的小数位数未达到上限 
+						dotIndex == -1 && (rng.end == val.length || val.substring(rng.end).length <= dl) ||
+						// 输过".", 且选中部分文本包含"." 
+						dotIndex > -1 && rng.begin <= dotIndex && dotIndex < rng.end)
+						return;
+				}
+				return false;
+			}
+			// 验证输入的值 
+			function validateValue(dotIndex, val, rLeft, rRight, nl, dl) {
+				if (
+					// 未输入过"." 
+					dotIndex == -1 && val.length < nl ||
+					// 光标位置在"."之前 
+					rLeft && val.substring(0, dotIndex).length < nl ||
+					// 光标在"."之后且未达到小数上限 
+					rRight && val.substring(dotIndex + 1).length < dl)
+					return true;
+				return false;
+			}
+			// 获取光标位置 
+			function caret() {
+				var begin, end;
+				begin = 0 - range.duplicate().moveStart('character', -100000);
+				end = begin + range.text.length;
+//			}
+//			return {
+//				begin: begin,
+//				end: end
+//			};
+}
+		</script>
+		<input type="text" onKeyUp="if(isNaN(value))execCommand('undo')" onafterpaste="if(isNaN(value))execCommand('undo')"  size="30"maxlength="15" />
+		<input type="text" id="t1" />
+		<input type="text" id="t2" data-numbers="5" data-decimals="4" />
+		<script>
+			document.getElementById("t1").onkeydown = validateDigitsOnly;
+			document.getElementById("t2").onkeydown = validateDigitsOnly;
+		</script>
+	</body>
+
+</html>

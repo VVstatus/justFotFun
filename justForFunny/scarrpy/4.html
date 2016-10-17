@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" id="aa" onblur="re();" />
+		<script>
+			function re() {
+				var val = document.getElementById("aa").value;
+//				document.getElementById("aa").value = '';
+				document.getElementById("aa").value = parseInt(val);
+			}
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.d1 {
+				float: left;
+				width: 10%;
+				height: 100%;
+				min-height: 800px;
+				font-size: 18px;
+				background-color: #efeff4;
+			}
+			
+			.d2 {
+				float: right;
+				width: 88%;
+				min-height: 800px;
+				overflow-y: hidden;
+			}
+			
+			.d1 p {
+				margin: 0 auto;
+				padding-top: 10px;
+				height: 32px;
+				text-align: center;
+			}
+			
+			.selected {
+				color: #000000;
+				background-color: #FAFAFA;
+			}
+			.kong{
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="d1" id="d1_test"></div>
+		<div class="d2" id="d2_test">
+		<input type="button" style="margin-left: 20px;width: 214px;height: 214px;border-radius: 20px;background-image: url(../../img/business_active.png);
+	display: none;"/>
+		</div>
+		<script>
+			var m = [];
+			var q = 0;
+			var n = [];
+			var mmkMenuList = [{
+				"menuId": "000000",
+				"menuName": "移动营销",
+				"menuDesc": null,
+				"menuParent": "-1",
+				"menuStatus": "0",
+				"menuOrder": "0"
+			}, {
+				"menuId": "010000",
+				"menuName": "借记卡管理",
+				"menuDesc": null,
+				"menuParent": "000000",
+				"menuStatus": "0",
+				"menuOrder": "1"
+			}, {
+				"menuId": "010001",
+				"menuName": "借记卡开卡",
+				"menuDesc": null,
+				"menuParent": "010000",
+				"menuStatus": "0",
+				"menuOrder": "2"
+			}, {
+				"menuId": "010006",
+				"menuName": "卡激活",
+				"menuDesc": null,
+				"menuParent": "010000",
+				"menuStatus": "0",
+				"menuOrder": "2"
+			}, {
+				"menuId": "010010",
+				"menuName": "借记卡销卡",
+				"menuDesc": null,
+				"menuParent": "010000",
+				"menuStatus": "0",
+				"menuOrder": "2"
+			}, {
+				"menuId": "020000",
+				"menuName": "网银服务",
+				"menuDesc": null,
+				"menuParent": "000000",
+				"menuStatus": "0",
+				"menuOrder": "1"
+			}, {
+				"menuId": "020001",
+				"menuName": "网银签约",
+				"menuDesc": null,
+				"menuParent": "020000",
+				"menuStatus": "0",
+				"menuOrder": "2"
+			}];
+			for (var i = 0; i < mmkMenuList.length; i++) {
+				if (mmkMenuList[i].menuOrder == 1) {
+					m[i] = i;
+				}
+				if (m[i] != undefined) {
+					n[q] = m[i];
+					q += 1;
+				}
+			}
+			var d = '';
+			for (var i = 0; i < n.length; i++) {
+				if (i == 0) {
+					d = "<p class='selected' id='"+i+"' onclick='openList(" + i + ")'>" + mmkMenuList[n[i]].menuName + "</p>";
+				} else {
+					d += "<p id='"+i+"' onclick='openList(" + i + ")'>" + mmkMenuList[n[i]].menuName + "</p>";
+				}
+			}
+			
+			document.getElementById("d1_test").innerHTML = d;
+			n[q] = mmkMenuList.length - 1;
+
+			function openList(i) {
+				document.getElementById("d2_test").innerHTML ="";
+				if (document.querySelector(".selected") != null) {
+					document.querySelector(".selected").classList.remove("selected");
+				}
+				document.getElementById(i).classList.add("selected");
+				var mm="";
+				var qq = n[i+1]-n[i];
+				if(qq==1){
+					qq=2;
+				}else{
+					qq = n[i+1]-n[i];
+				}
+				for(var j=1;j<qq;j++){
+//					mm+="<img src='../img/"+mmkMenuList[n[i]+j].menuId+".jpg'/>";
+					mm+="<input type='button' style='margin-left: 20px;width: 214px;height: 214px;border-radius: 20px;background-image:url(../img/"+mmkMenuList[n[i]+j].menuId+".jpg)'/>";
+				}
+				
+				document.getElementById("d2_test").innerHTML = mm;
+			}
+			//			console.log(n);
+			//			var w = mmkMenuList.slice(1, 5);
+			//			console.log(w);
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				background-color: #4CD964;
+			}
+			img{
+				margin: 20px 40px;
+			}
+		</style>
+	</head>
+	<body>
+		<div style="height: 600px;width:100%;background: rgba(0,0,0,0.2);position: relative;">
+			<img src="img/010001.jpg" id="img1" onclick="openorclose(1);"/>
+			<img src="img/010010.jpg" id="img2" onclick="openorclose(2);"/>
+			<img src="img/020001.jpg" id="img3" onclick="openorclose(3);"/>
+			<img src="img/010006.png" id="img4" onclick="openorclose(4);"/>
+			<button style="position: absolute;right: 10%;bottom: 10%;width: 80px;border:none">确定</button>
+		</div>
+		
+		<script>
+		window.onload = function(){
+//			alert(2);
+//			document.getElementById("img1").src = "img/010001.jpg";
+		}
+//			document.getElementsByTagName('img').onclick = function(){
+//				if(this.style.webkitTransform ==''){
+//					this.style.webkittransition="-webkit-transform 4s ease-out";
+//					this.style.webkitTransform="scale(2)";
+//				}else{
+//					this.style.transition="-webkit-transform 500ms ease-out";
+//					this.style.webkitTransform="";
+//				}
+//			}
+//			document.getElementById("img2").onclick = function(){
+//				if(this.style.webkitTransform ==''){
+//					this.style.transition="-webkit-transform 500ms ease-out";
+//					this.style.webkitTransform="scale(2)";
+//				}else{
+//					this.style.transition="-webkit-transform 500ms ease-out";
+//					this.style.webkitTransform="";
+//				}
+//			}
+			function openorclose(i){
+				var m = document.getElementById("img"+i);
+				if(m.style.webkitTransform ==''){
+					m.style.webkittransition="-webkit-transform 4s ease-out";
+					m.style.webkitTransform="translate(100px,100px) scale(2)";
+				}else{
+					m.style.transition="-webkit-transform 500ms ease-out";
+					m.style.webkitTransform="";
+				}
+			}
+		</script>
+	</body>
+</html>

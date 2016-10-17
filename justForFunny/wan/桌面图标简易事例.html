@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.d{
+				width: 200px;
+				height: 200px;
+				background-color: #999999;
+				margin-left: 10%;
+				margin-top: 10%;
+				border-radius:50px ;
+			}
+			.d1{
+				width: 40%;
+				height: 40%;
+				margin-left: 6%;
+				margin-top: 6%;
+				display: inline-block;
+				background-color: red;
+				border-radius:12px ;
+			}
+			.d2{
+				width: 40%;
+				height: 40%;
+				margin-left: 6%;
+				margin-top: 6%;
+				display: inline-block;
+				background-color: blue;
+				border-radius:12px ;
+			}
+			.d3{
+				width: 40%;
+				height: 40%;
+				margin-left: 6%;
+				margin-top: 6%;
+				display: inline-block;
+				background-color: purple;
+				border-radius:12px ;
+			}
+			.d4{
+				width: 40%;
+				height: 40%;
+				margin-left: 6%;
+				margin-top: 6%;
+				display: inline-block;
+				background-color: orange;
+				border-radius:12px ;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="d" id="d" >
+			<div class="d1"></div>
+			<div class="d2"></div>
+			<div class="d3"></div>
+			<div class="d4"></div>
+		</div>
+		<script>
+			document.getElementById("d").onclick = function (){
+				var m = document.getElementById("d").style.height;
+				if(m == "200px"){
+					var h = 10;
+					document.getElementById("d").style.height = "400px";
+					document.getElementById("d").style.width = "400px";
+				}else{
+					document.getElementById("d").style.height = "200px";
+					document.getElementById("d").style.width = "200px";
+				}
+				
+			}
+		</script>
+	</body>
+</html>

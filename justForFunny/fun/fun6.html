@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.myheart {
+				width: 200px;
+				height: 165px;
+				position: relative;
+			}
+			.myheart:before, .myheart:after {
+				content: "";
+				position: absolute;
+				width: 100px;
+				height: 165px;
+				background: red;
+				border-radius: 50px 50px 0 0;
+			}
+			.myheart:before {
+				left: 100px;
+				top: 0;
+				-webkit-transform: rotate(-45deg);
+				-moz-transform: rotate(-45deg);
+				-o-transform: rotate(-45deg);
+				transform: rotate(-45deg);
+				-webkit-transform-origin: left bottom;
+				-moz-transform-origin: left bottom;
+				-o-transform-origin: left bottom;
+				transform-origin: left bottom;
+			}
+			.myheart:after {
+				left: 0;
+				top: 0;
+				-webkit-transform: rotate(45deg);
+				-moz-transform: rotate(45deg);
+				-o-transform: rotate(45deg);
+				transform: rotate(45deg);
+				-webkit-transform-origin: right bottom;
+				-moz-transform-origin: right bottom;
+				-o-transform-origin: right bottom;
+				transform-origin: right bottom;
+			}
+			.myheart {
+				-webkit-animation: heartjump 2s infinite alternate;
+				-moz-animation: heartjump 2s infinite alternate;
+				-o-animation: heartjump 2s infinite alternate;
+				animation: heartjump 2s infinite alternate;
+			}
+			@-webkit-keyframes heartjump {
+				0%, 60%, 75%, 90%, 100% {
+					-webkit-transform: scale(1);
+				}
+				15% {
+					-webkit-transform: scale(0.6);
+				}
+				30% {
+					-webkit-transform: scale(1);
+				}
+				45% {
+					-webkit-transform: scale(0.7);
+				}
+			}
+			@-moz-keyframes heartjump {
+				0%, 60%, 75%, 90%, 100% {
+					-moz-transform: scale(1);
+				}
+				15% {
+					-moz-transform: scale(0.6);
+				}
+				30% {
+					-moz-transform: scale(1);
+				}
+				45% {
+					-moz-transform: scale(0.7);
+				}
+			}
+			@-o-keyframes heartjump {
+				0%, 60%, 75%, 90%, 100% {
+					-o-transform: scale(1);
+				}
+				15% {
+			 		-o-transform: scale(0.6);
+				}
+				30% {
+					-o-transform: scale(1);
+				}
+				45% {
+					-o-transform: scale(0.7);
+				}
+			}
+			@keyframes heartjump {
+				0%, 60%, 75%, 90%, 100% {
+					transform: scale(1);
+				}
+				15% {
+					transform: scale(0.6);
+				}
+				30% {
+					transform: scale(1);
+				}
+				45% {
+					transform: scale(0.7);
+				}
+			}
+		</style>
+	</head>
+	<body>
+	<div class="myheart"></div>
+	</body>
+</html>

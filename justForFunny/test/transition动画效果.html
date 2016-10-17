@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>无标题文档</title>
+<style>
+	#block{width:200px;height:200px;margin:auto;background:#30F;-webkit-transition:background-color 3s;transition:background-color 3s;}
+	#block:hover{background-color:#C00;}
+	#block2{width:400px;margin:auto;}
+	.easebar{width:20px;height:20px;background:pink;}
+	.easebar:hover{width:400px;}
+	#bar1{transition:width 10s ease;-webkit-transition:width 10s ease;}
+	#bar2{transition:width 10s ease-in;-webkit-transition:width 10s ease-in;}
+	#bar3{transition:width 10s ease-out;-webkit-transition:width 10s ease-out;}
+	#bar4{transition:width 10s ease-in-out;-webkit-transition:width 10s ease-in-out;}
+	#bar5{transition:width 10s linear;-webkit-transition:width 10s linear;}
+	#experiment{-webkit-perspective:800;-webkit-perspective-origin:50% 50%;-webkit-transform-style:-webkit-preserve-3d;perspective:800;perspective-origin:50% 50%;transform-style:preserve-3d;}
+	#block3{width:200px;height:200px;background:#06F;margin:100px auto;transform:rotateY(45deg);-webkit-transform:rotateY(45deg);}
+	#pageWrap{perspective:800;perspective-origin:50% 50%;-webkit-perspective:800;-webkit-perspective-origin:50% 50%;overflow:hidden;}
+	#pageGroup{-webkit-transform-style:-webkit-perserve-3d;transform-style:perserve-3d;margin:auto;width:400px;height:400px;position:relative;overflow:hidden;}
+	.page{position:absolute;width:360px;height:360px;line-height:360px;background:black;color:#fff;font-size:360px;font-weight:bold;padding:20px;text-align:center;}
+	#page1{transform-origin:bottom;transition:transform 1s linear;-webkit-transform-origin:bottom;-webkit-transition:-webkit-transform 1s linear;}
+	#page2,#page3,#page4,#page5,#page6{transform-origin:bottom;transition:transform 1s linear;-webkit-transform-origin:bottom;-webkit-transition:-webkit-transform 1s linear;transform:rotateX(90deg);-webkit-transform:rotateX(90deg);}
+	#op{margin:100px auto;text-align:center}
+</style>
+<script type="text/javascript">
+	var curIndex = 1;
+	function next(){
+		  if(curIndex==6)
+		 return; 
+		var curPage = document.getElementById('page'+curIndex);
+		curPage.style.transform = "rotateX(-90deg)";
+		curPage.style.webkitTransform = "rotateX(-90deg)";
+		curIndex++;
+		var nextPage = document.getElementById('page'+curIndex);
+		nextPage.style.webkitTransform = "rotateX(0deg)";
+		nextPage.style.transform = "rotateX(0deg)";
+		}
+	function prew(){
+		 if(curIndex==1)
+		 return;
+		var curPage = document.getElementById('page'+curIndex);
+		curPage.style.webkitTransform = "rotateX(90deg)";
+		curPage.style.transform = "rotateX(90deg)";
+		curIndex--;
+		var prevPage = document.getElementById('page'+curIndex);
+		prevPage.style.webkitTransform = "rotateX(0deg)";
+		prevPage.style.transform = "rotateX(0deg)";
+		};
+</script>
+</head>
+
+<body>
+<div id="pageWrap">
+	<div id="pageGroup">
+    	<div class="page" id="page1">1</div>
+        <div class="page" id="page2">2</div>
+        <div class="page" id="page3">3</div>
+        <div class="page" id="page4">4</div>
+        <div class="page" id="page5">5</div>
+        <div class="page" id="page6">6</div>
+    </div>
+    <div id="op">
+    <a href="javascript:next()">next</a>　　<a href="javascript:prew()">previous</a>
+    </div>
+</div>
+	<div id="block">
+    
+    </div>
+    <div id="block2">
+    <p>ease</p>
+    <div class="easebar" id="bar1"></div>
+    <p>ease-in</p>
+    <div class="easebar" id="bar2"></div>
+    <p>ease-out</p>
+    <div class="easebar" id="bar3"></div>
+    <p>ease-in-out</p>
+    <div class="easebar" id="bar4"></div>
+    <p>linear</p>
+    <div class="easebar" id="bar5"></div>
+    </div>
+    <div id="experiment">
+    	<div id="block3">
+        
+        </div>
+    </div>
+</body>
+</html>

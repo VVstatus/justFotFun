@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width: 200px;
+				height: 200px;
+				overflow: hidden;
+				position: relative;
+			}
+			img{
+				width: 200px;
+				height: 200px;
+				/*动画过度2秒*/
+				transition: transform 2s;
+			}
+			img:hover{
+				width: 200px;
+				height: 200px;
+				/*transition: ;*/
+				/*动画*/
+				transform: scale(1.1) rotate(4deg);
+				overflow: hidden;
+			}
+			div span{
+				background-color: #F0AD4E;
+				position: absolute;
+				left: 10px;
+				top:6px;
+				color: #FFFFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<img src="images/cbd.jpg" title="放大缩小"/>
+			<span>放大缩小实验</span>
+		</div>
+	</body>
+</html>

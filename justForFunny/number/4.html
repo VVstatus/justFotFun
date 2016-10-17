@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.d{
+				padding:80px 200px;
+				position: relative;
+				animation:myfirst 2s linear infinite alternate;
+			}
+			.d1{
+				position: absolute;
+				left: 25px;
+				top: 5px;
+				height: 160px;
+				width: 100px;
+				background-color: red;
+				border-radius:50px 50px 0 0;
+				transform: rotate(-48deg);
+				animation:my 2s;
+			}
+			.d2{
+				position: absolute;
+				right: 1174px;
+				top:5px;
+				height: 160px;
+				width: 100px;
+				background-color: red;
+				border-radius:50px 50px 0 0;
+				transform: rotate(48deg);
+				animation:my 1.5s;
+			}
+			@keyframes myfirst
+			{
+				from{transform: scale(1);}
+				to{transform:scale(1.05);}
+			}
+			@keyframes my{
+				from{height: 160px;}
+				to{height: 170px;}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="d">
+			<div class="d1">
+			
+			</div>
+			<div class="d2">
+				
+			</div>
+		</div>
+	</body>
+</html>

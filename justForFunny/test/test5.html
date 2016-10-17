@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<img id="img1" src="http://img1.gtimg.com/digi/pics/hv1/184/36/2076/135001264.jpg">
+		<p id="p1">loading...</p>
+		<script type="text/javascript">
+			function imgLoad(img, callback) {
+				var timer = setInterval(function() {
+					if (img.complete) {
+						callback(img)
+						clearInterval(timer)
+					}
+				}, 50)
+			}
+			imgLoad(img1, function() {
+				console.log(img1.height);
+				document.getElementById("p1").innerHTML = "2222";
+			});
+			
+		</script>
+	</body>
+
+</html>

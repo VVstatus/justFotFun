@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/app.css">
+		<style>
+			input[type=checkbox] {
+				float: right;
+				position: absolute;
+				right: 8px;
+			}
+			
+			.app-content-left {
+				padding: 0;
+				margin: 0;
+				margin-left: 4%;
+			}
+			
+			.div {
+				background-image: url(../../images/logo.png);
+				background-repeat: no-repeat;
+				background-position: center;
+				margin: auto 1%;
+				width: 200px;
+				height: 200px;
+				display: inline-block;
+				position: relative;
+				border: 1px solid #0000FF;
+			}
+			
+			.div span {
+				position: absolute;
+				bottom: 6%;
+				left: 32%;
+			}
+			
+			.app-content-bottom {
+				width: 100%;
+				height: 200px;
+				padding-top: 180px;
+			}
+			
+			.app-content-bottom button {
+				width: 200px;
+				height: 60px;
+				background-color: #007AFF;
+				color: #fff;
+				border-radius: 5px;
+				font-size: 30px;
+				margin: auto 10%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="height: 53px;">
+			<div class="mian_title">
+				<a href="" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			</div>
+			<div id="home" style="float: right;">
+				<a id="home" class="mui-icon mui-icon-home-filled"></a>
+			</div>
+			<h1 id="title" class="mui-title" style="margin-top: 5px;">影像资料</h1>
+		</header>
+		<div class="mui-content">
+			<div class="app-content-left" style="height: 500px; min-height: 500px;">
+				<!--<div class="app-content-left-top">
+					<h2>获取身份信息</h2>
+					<hr>
+				</div>-->
+				<div class="app-content-left-mid" id="wenjian" align="center">
+					<!--<div id="div1" class="div" onclick="open('iput1')">
+						<input name="cbx" type="checkbox" value="1" id="put1" />
+					</div>
+					<div id="div2" class="div" onclick="open(2);">
+						<input name="cbx" type="checkbox" value="2" id="put2" />
+					</div>
+					<div id="div3" class="div" onclick="open(3);">
+						<input name="cbx" type="checkbox" value="3" id="put3" />
+					</div>
+					<div id="div4" class="div" onclick="open(4);">
+						<input name="cbx" type="checkbox" value="4" id="put4" />
+					</div>-->
+				</div>
+
+				<div class="app-content-bottom" align="center">
+					<button id="uploadImg">上传</button>
+					<button id="deleteImg">删除</button>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				var url = '_doc/';
+				plus.io.resolveLocalFileSystemURL(
+					url,
+					function(entry) {
+						var dr = entry.createReader();
+						dr.readEntries(function(entries) {
+							var wj = '';
+							for (var i = 0; i < entries.length; i++) {
+								wj = wj + "<div name='dput' id='d" + i + "' class='div'>" +
+									"<input type='checkbox' name='put' id='" + entries[i].name + "'/>" +
+									"<span>" + i + "(共张" + i + "图片)" + "</span>" +
+									"</div>";
+							}
+							document.getElementById("wenjian").innerHTML = '';
+							document.getElementById("wenjian").innerHTML = wj;
+							getID();
+						});
+					}
+				);
+
+			});
+
+			function getID() {
+				var l = document.getElementsByName("dput");
+				for (var i = 0; i < l.length; i++) {
+					var d = 'd' + i;
+					document.getElementById(d).onclick = function() {
+						var iput = this.children[0].id;
+						var put = document.getElementById(iput);
+						if (put.checked == true) {
+							document.getElementById(iput).checked = false;
+						} else {
+							document.getElementById(iput).checked = true;
+						}
+					}
+				}
+			}
+			//上传图片
+			document.getElementById("uploadImg").addEventListener('tap', function() {
+				var put = document.getElementsByName('put');
+				for (var i = 0; i < put.length; i++) {
+					if (put[i].checked == true) {
+						var url = '_doc/' + put[i].id;
+						plus.io.resolveLocalFileSystemURL(
+							url,
+							function(entry) {
+								var dr = entry.createReader();
+								dr.readEntries(function(entries) {
+									for (var i = 0; i < entries.length; i++) {
+										var task = plus.uploader.createUpload("http://10.18.10.160:9080/markbank/uploadImageData.do", {}, function(t, status) {
+											// 上传完成
+											if (status == 200) {
+												plus.nativeUI.closeWaiting();
+												mui.toast("照片上传成功！");
+											} else {
+												plus.nativeUI.closeWaiting();
+												mui.toast("照片上传失败！");
+											}
+										});
+										var urls = url + entries[i].name;
+										task.addFile(urls, {
+											key: "img" + i
+										});
+										task.addData("img", urls);
+										task.start();
+									}
+								});
+							}
+						);
+					}
+				}
+			})
+
+			//删除图片
+			function deleteImg() {
+				var put = document.getElementsByName('put');
+				for (var i = 0; i < put.length; i++) {
+					if (put[i].checked == true) {
+						var url = '_doc/' + put[i].id;
+						plus.io.resolveLocalFileSystemURL(url, function(entry) {
+							entry.remove(function(entry) {
+			                	console.log("文件删除成功==" + url);
+							}, function(e) {
+			                	console.log("文件删除失败=" + url);
+							});
+						});
+					}
+				}
+			}
+		</script>
+	</body>
+
+</html>

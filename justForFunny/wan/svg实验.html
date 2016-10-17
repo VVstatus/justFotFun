@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<embed src="wan1.svg" type="image/svg+xml"></embed>
+		<embed src="wan.svg" type="image/svg+xml"></embed>
+		<script type="text/javascript">
+			var name = "The Window";　　
+			var object = {　　　　
+				name: "My Object",
+				　　　　getNameFunc: function() {　　　　　　
+					return function() {　　　　　　　　
+						return this.name;　　　　　　
+					};　　　　
+				},
+				　　　　getNameFunc1: function() {　　　　　　　　
+					return this.name;　　　　
+				}　　
+			};
+			　　
+			alert(object.getNameFunc()());　　
+			alert(object.getNameFunc1());
+		</script>
+	</body>
+
+</html>
